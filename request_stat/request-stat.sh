@@ -4,7 +4,7 @@ MONTH=`date +%Y-%m --date="$1"`
 INPUT=/apps/ds-api/log/$MONTH/*.$DAY.log
 OUTPUT=/apps/ds-api/request-report/$MONTH/$DAY
 
-cd $HOME/bin
+cd ~/daily-cron-ds-api/request_stat
 ./request-hadoop.sh $INPUT $OUTPUT
 
-hadoop fs -cat $OUTPUT/part* | sort | mail -s "ds-api-prod: Daily request statistic $DAY" maverick@factual.com,ds-api@factual.com
+hadoop fs -cat $OUTPUT/part* | mail -s "ds-api-prod: Daily request statistic $DAY" ds-api@factual.com
