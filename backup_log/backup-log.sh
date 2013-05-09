@@ -1,5 +1,5 @@
 IFS=","
-SERVERS="bm01,bm02,10.20.10.148,10.20.10.149,10.199.1.158,10.199.1.188,10.199.1.52,10.199.0.76,10.199.0.108,10.199.1.56,10.199.0.169,10.199.1.70"
+SERVERS=`ruby backup_log/prod-processes.rb`
 USERNAME=deploy
 
 YESTERDAY=`date +%Y-%m-%d --date="$1"`
