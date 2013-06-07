@@ -1,5 +1,5 @@
 IFS=","
-SERVERS=`ruby backup_log/prod-processes.rb`
+SERVERS=`/home/maverick/.rvm/rubies/ruby-1.9.3-p0/bin/ruby ~/daily-cron-ds-api/backup_log/prod-processes.rb`
 USERNAME=deploy
 
 YESTERDAY=`date +%Y-%m-%d --date="$1"`
@@ -19,7 +19,7 @@ for server in $SERVERS; do
   then
     echo "Backup failed, $DEST_DIR/$server.$DEST_FILE already exist on hdfs\n$exist" | mail -s "Log backup failed on $server" maverick@factual.com
   else
-    ssh $USERNAME@$server "cat $LOG_DIR/$LOG_FILE" | hadoop fs -put - $DEST_DIR/$server.$DEST_FILE
+    ssh -o "StrictHostKeyChecking no" $USERNAME@$server "cat $LOG_DIR/$LOG_FILE" | hadoop fs -put - $DEST_DIR/$server.$DEST_FILE
     echo "$DEST_DIR/$server.$DEST_FILE copied"
   fi
 done
