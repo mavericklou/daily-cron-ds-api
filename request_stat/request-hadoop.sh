@@ -1,6 +1,6 @@
 echo "INPUT: $1"
 echo "OUTPUT: $2"
-hadoop jar /etc/alternatives/hadoop-lib/contrib/streaming/hadoop-streaming-0.20.2-cdh3u4.jar \
+hadoop jar /etc/alternatives/hadoop-lib/contrib/streaming/hadoop-streaming-0.20.2-cdh3u6.jar \
 -D mapred.output.compress=false \
 -D mapred.reduce.tasks=1 \
 -D mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
