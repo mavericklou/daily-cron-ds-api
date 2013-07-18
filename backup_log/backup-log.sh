@@ -11,7 +11,7 @@ echo "Working on $LOG_FILE"
 
 DEST_DIR=/apps/ds-api/log/$MONTH
 hadoop fs -mkdir $DEST_DIR > /dev/null 2>&1
-DEST_FILE=$YESTERDAY.log
+DEST_FILE=$YESTERDAY.gz
 
 for server in $SERVERS; do
   exist=`hadoop fs -lsr $DEST_DIR/$server.$DEST_FILE`
@@ -19,7 +19,7 @@ for server in $SERVERS; do
   then
     echo "Backup failed, $DEST_DIR/$server.$DEST_FILE already exist on hdfs\n$exist" | mail -s "Log backup failed on $server" maverick@factual.com
   else
-    ssh -o "StrictHostKeyChecking no" $USERNAME@$server "cat $LOG_DIR/$LOG_FILE" | hadoop fs -put - $DEST_DIR/$server.$DEST_FILE
+    ssh -o "StrictHostKeyChecking no" $USERNAME@$server "cat $LOG_DIR/$LOG_FILE" | gzip -c | hadoop fs -put - $DEST_DIR/$server.$DEST_FILE
     echo "$DEST_DIR/$server.$DEST_FILE copied"
   fi
 done
