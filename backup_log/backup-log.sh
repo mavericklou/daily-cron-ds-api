@@ -2,16 +2,16 @@ IFS=","
 SERVERS=`/home/maverick/.rvm/rubies/ruby-1.9.3-p0/bin/ruby ~/daily-cron-ds-api/backup_log/prod-processes.rb`
 USERNAME=deploy
 
-YESTERDAY=`date +%Y-%m-%d --date="$1"`
+DAY=`date +%Y-%m-%d --date="$1"`
 MONTH=`date +%Y-%m --date="$1"`
 LOG_DIR=/var/log/factual/ds-api
-LOG_FILE=ds-api.$YESTERDAY.log
+LOG_FILE=ds-api.$DAY.log
 
 echo "Working on $LOG_FILE"
 
 DEST_DIR=/apps/ds-api/log/$MONTH
 hadoop fs -mkdir $DEST_DIR > /dev/null 2>&1
-DEST_FILE=$YESTERDAY.gz
+DEST_FILE=$DAY.gz
 
 for server in $SERVERS; do
   exist=`hadoop fs -lsr $DEST_DIR/$server.$DEST_FILE`
