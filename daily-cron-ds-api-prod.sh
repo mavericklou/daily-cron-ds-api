@@ -1,5 +1,5 @@
 echo `date`
-. ~/.keychain/$HOSTNAME-sh
+. ~/.keychain/mav-2ce-sh
 
 WORK_DIR=~/daily-cron-ds-api
 
