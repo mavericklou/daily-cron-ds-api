@@ -7,4 +7,4 @@ OUTPUT=/apps/ds-api/request-report/$MONTH/$DAY
 cd ~/daily-cron-ds-api/request_stat
 ./request-hadoop.sh $INPUT $OUTPUT
 
-hadoop fs -cat $OUTPUT/part* | mail -s "ds-api-prod: Daily request statistic $DAY" maverick@factual.com,zach@factual.com,myron@factual.com,chun@factual.com,aaron@factual.com
+hadoop fs -cat $OUTPUT/part* | mail -s "ds-api-prod: Daily request statistic $DAY" maverick@factual.com,zach@factual.com
